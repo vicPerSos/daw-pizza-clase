@@ -1,5 +1,7 @@
 package com.daw.services;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.daw.persistence.entities.Cliente;
 import com.daw.persistence.repositories.ClienteRepository;
+import com.daw.services.dtos.TopDTO;
 
 @Service
 public class ClienteService {
@@ -26,6 +29,16 @@ public class ClienteService {
 	
 	public Optional<Cliente> findById(int idCliente){
 		return this.clienteRepository.findById(idCliente);
+	}
+	public List<TopDTO> getTop3(){
+		List<Object[]> top=this.clienteRepository.findTop3Clientes();
+		List<TopDTO> result=new ArrayList<>();
+		for (Object[] obj : top) {
+			result.add(new TopDTO((String) obj[0], (String) obj[1],
+			(String) obj[2], (String) obj[3], ((BigDecimal)obj[4]).doubleValue()));
+			}
+			return result;
+
 	}
 	
 	public Cliente create(Cliente cliente) {

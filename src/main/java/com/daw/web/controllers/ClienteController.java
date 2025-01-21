@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.daw.persistence.entities.Cliente;
 import com.daw.services.ClienteService;
+import com.daw.services.dtos.TopDTO;
 
 
 @RestController
@@ -40,6 +41,10 @@ public class ClienteController {
 		}
 		
 		return ResponseEntity.ok(cliente.get());
+	}
+	@GetMapping("/top")
+	public ResponseEntity<List<TopDTO>> top() {
+		return ResponseEntity.ok(this.clienteService.getTop3());
 	}
 	
 	@PostMapping

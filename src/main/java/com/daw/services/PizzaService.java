@@ -51,7 +51,7 @@ public class PizzaService {
 	}
 	
 	public List<Pizza> getByNombre(String nombre) {
-		return this.pizzaRepository.findByDisponibleTrueAndNombreStartingWith(nombre);
+		return this.pizzaRepository.findByDisponibleTrueAndNombreContaining(nombre);
 	}
 	
 	public List<Pizza> getIngrediente(String ingrediente) {

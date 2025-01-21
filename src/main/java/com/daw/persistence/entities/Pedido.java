@@ -24,35 +24,42 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Pedido {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "id_cliente")
 	private Integer idCliente;
-	
+
 	@Column(columnDefinition = "DATETIME")
 	private LocalDateTime fecha;
-	
+
 	@Column(columnDefinition = "DECIMAL(6,2)")
 	private Double total;
-	
+
 	// D = Delivery
 	// R = Recoger
 	// L = Local
 	@Column(columnDefinition = "CHAR(1)")
 	private String metodo;
-	
+
 	@Column(columnDefinition = "VARCHAR(200)")
 	private String notas;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_cliente", referencedColumnName = "id", insertable = false, updatable = false)
 	private Cliente cliente;
-	
+
 	@OneToMany(mappedBy = "pedido")
 	@JsonIgnore
 	private List<PizzaPedido> pizzaPedidos;
+
+	public Pedido(Integer id, Integer idCliente, String metodo, String notas) {
+		this.total = 0.00;
+		this.metodo = metodo;
+		this.notas = notas;
+		this.fecha = LocalDateTime.now();
+	}
 
 }

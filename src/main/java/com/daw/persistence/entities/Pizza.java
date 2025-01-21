@@ -34,4 +34,12 @@ public class Pizza {
 	private Boolean vegana;
 	private Boolean disponible;
 
+	public Pizza(String nombre, String descripcion, Double precio, Boolean vegetariana, Boolean vegana){
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.vegetariana = vegetariana;
+		this.vegana = vegana;
+		this.disponible = true;
+	}
 }
